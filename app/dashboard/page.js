@@ -37,7 +37,7 @@ export default function Dashboard() {
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className="me-auto">
-              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+              <Nav.Link href="/dashboard" className="fw-bold text-primary">Dashboard</Nav.Link>
               <Nav.Link href="/tickets">Tickets</Nav.Link>
               <Nav.Link href="/detections">Detectii</Nav.Link>
               <Nav.Link href="/trasee">Trasee</Nav.Link>
