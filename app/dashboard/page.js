@@ -18,7 +18,8 @@ export default function Dashboard() {
     const simulatedAlerts = [
       { id: 1, type: "success", msg: "Un traseu a început la 14:32" },
       { id: 2, type: "warning", msg: "Camera 2 este înclinată, ajustați poziția" },
-      { id: 3, type: "danger", msg: "OCR a detectat 3 erori consecutive" }
+      { id: 3, type: "danger", msg: "OCR a detectat 3 erori consecutive" },
+      { id: 4, type: "success", msg:"Bravo tinule ai invatat git"}
     ];
     setAlerts(simulatedAlerts);
     setTraseuActive(true);
