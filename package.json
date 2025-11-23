@@ -10,11 +10,21 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+<<<<<<< HEAD
+    "firebase": "^12.6.0",
+    "leaflet": "^1.9.4",
+=======
+>>>>>>> f54f19a1ea7cf63a81aac97f5462d489c6b076c0
     "lucide-react": "^0.554.0",
     "next": "16.0.3",
     "react": "19.2.0",
     "react-bootstrap": "^2.10.10",
+<<<<<<< HEAD
+    "react-dom": "19.2.0",
+    "react-leaflet": "^5.0.0"
+=======
     "react-dom": "19.2.0"
+>>>>>>> f54f19a1ea7cf63a81aac97f5462d489c6b076c0
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
