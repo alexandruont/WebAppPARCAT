@@ -150,18 +150,21 @@ function transformVehicleData(vehicleData, index = 0) {
     if (vehicleData.gps && vehicleData.gps.includes(',')) {
         [lat, lng] = vehicleData.gps.split(',').map(Number);
     }
+    const d = new Date(vehicleData.data?.detectionTime);
+    const date = d.toLocaleDateString();      // e.g. "11/23/2025"
+    const time = d.toLocaleTimeString();
 
     return {
         id: vehicleData.id || `vehicle-${index}`,
-        nr: vehicleData.license_plate || 'Necunoscut',
+        nr: vehicleData.data?.licensePlate || 'Necunoscut',
         lat,
         lng,
         zona: "Necunoscută",
-        details: `Detectat la ${vehicleData.datetime || 'necunoscut'}`,
+        details: `Detectat la ${date || 'necunoscut'}`,
         status: 'nevalidat',
-        timestamp: Date.parse(vehicleData.datetime) || Date.now(),
-        imageUrl: vehicleData.image
-            ? `data:image/jpeg;base64,${vehicleData.image}`
+        timestamp: Date.parse(time) || Date.now(),
+        imageUrl: vehicleData.data?.image
+            ? `data:image/jpeg;base64,${vehicleData.data.image}`
             : "https://placehold.co/600x400?text=NO+IMAGE"
     };
 }
@@ -169,10 +172,11 @@ function transformVehicleData(vehicleData, index = 0) {
     useEffect(() => {
         async function fetchDetections() {
             try {
-                const res = await fetch('http://localhost:5000/detections'); // API-ul local
+                const res = await fetch('http://127.0.0.1:8000/data/detections/by-session/session_2025-11-23_15_53_49'); // API-ul local
                 if (!res.ok) throw new Error('Eroare la fetch API');
                 const rawData = await res.json();
-                const transformed = rawData.map((v, i) => transformVehicleData(v, i));
+                console.log(rawData);
+                const transformed = rawData['detections'].map((v, i) => transformVehicleData(v, i));
                 setDetections(transformed);
             } catch (error) {
                 console.error('Eroare la preluarea datelor API:', error);
