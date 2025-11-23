@@ -144,7 +144,6 @@ export default function DetectionsPage() {
     // Fetch API local
     // ---------------------------
 
-<<<<<<< HEAD
 function transformVehicleData(vehicleData, index = 0) {
     // GPS poate lipsi → fallback
     let lat = 0, lng = 0;
@@ -166,23 +165,6 @@ function transformVehicleData(vehicleData, index = 0) {
             : "https://placehold.co/600x400?text=NO+IMAGE"
     };
 }
-=======
-    function transformVehicleData(vehicleData, index = 0) {
-        const [lat, lng] = vehicleData.gps.split(',').map(Number);
-
-        return {
-            id: `vehicle-${index}`,
-            nr: vehicleData.license_plate || 'Necunoscut',
-            lat: lat || 0,
-            lng: lng || 0,
-            zona: 'Necunoscută',
-            details: `Detected at ${vehicleData.datetime}`,
-            status: 'nevalidat',
-            timestamp: new Date(vehicleData.datetime).getTime(),
-            imageUrl: `data:image/jpeg;base64,${vehicleData.image}`
-        };
-    }
->>>>>>> cbe18cd (prototip webapp 1)
 
     useEffect(() => {
         async function fetchDetections() {
