@@ -144,21 +144,27 @@ export default function DetectionsPage() {
     // Fetch API local
     // ---------------------------
 
-    function transformVehicleData(vehicleData, index = 0) {
-        const [lat, lng] = vehicleData.gps.split(',').map(Number);
-
-        return {
-            id: `vehicle-${index}`,
-            nr: vehicleData.license_plate || 'Necunoscut',
-            lat: lat || 0,
-            lng: lng || 0,
-            zona: 'Necunoscută',
-            details: `Detected at ${vehicleData.datetime}`,
-            status: 'nevalidat',
-            timestamp: new Date(vehicleData.datetime).getTime(),
-            imageUrl: `data:image/jpeg;base64,${vehicleData.image}`
-        };
+function transformVehicleData(vehicleData, index = 0) {
+    // GPS poate lipsi → fallback
+    let lat = 0, lng = 0;
+    if (vehicleData.gps && vehicleData.gps.includes(',')) {
+        [lat, lng] = vehicleData.gps.split(',').map(Number);
     }
+
+    return {
+        id: vehicleData.id || `vehicle-${index}`,
+        nr: vehicleData.license_plate || 'Necunoscut',
+        lat,
+        lng,
+        zona: "Necunoscută",
+        details: `Detectat la ${vehicleData.datetime || 'necunoscut'}`,
+        status: 'nevalidat',
+        timestamp: Date.parse(vehicleData.datetime) || Date.now(),
+        imageUrl: vehicleData.image
+            ? `data:image/jpeg;base64,${vehicleData.image}`
+            : "https://placehold.co/600x400?text=NO+IMAGE"
+    };
+}
 
     useEffect(() => {
         async function fetchDetections() {
